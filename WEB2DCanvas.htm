@@ -1,0 +1,80 @@
+<html>
+
+<head>
+    <title>CANVAS_2D</title>
+</head>
+
+<body>
+    <form name="CAL">
+        Ax=<input name="inpAx" type "text" value="0" />
+        <BR> Ay=
+        <input name="inpAy" type "text" value="0" />
+        <BR> Bx=
+        <input name="inpBx" type "text" value="600" />
+        <BR> By=
+        <input name="inpBy" type "text" value="400" />
+        <BR>
+    </form>
+    <button onClick="draw();">[DRAW]</button>
+    <button onClick="clean();">[CLEAN]</button>
+    <BR>
+
+    <canvas id="firstCANVAS" width="600" height="400" style="border:2px solid #0000ff;">
+Your browser does not support the HTML canvas tag.
+</canvas>
+
+    <script>
+        var center_x = 64; // creating variable for center coords
+        var center_y = 54;
+
+        var incircle_radius = 22; // variables for the radii of the two circles
+        var excircle_radius = 44;
+
+        var triangle_h = 3 * incircle_radius; // variables for the triangle's height and side
+        var triangle_a = excircle_radius * Math.sqrt(3);
+
+        var ax = center_x; // coords for top point of triangle
+        var ay = center_y - excircle_radius;
+
+        var bx = center_x + (triangle_a / 2); // coords for bottom right
+        var by = center_x + incircle_radius - 10;
+
+        var cx = center_x - (triangle_a / 2); //coords for bottom left
+        var cy = center_x + incircle_radius - 10;
+
+        var c = document.getElementById("firstCANVAS");
+        var ctx = c.getContext("2d");
+
+        function draw() {
+
+            ctx.beginPath(); // triangle
+            ctx.moveTo(ax, ay); // starting from the top point
+            ctx.lineTo(bx, by); // moving to bottom right
+            ctx.lineTo(cx, cy); // moving to bottom left
+            ctx.lineTo(ax, ay); // closing the triangle by returning to the top
+            ctx.strokeStyle = 'black'; // setting color
+            ctx.stroke(); // drawing the triangle
+
+            ctx.beginPath(); // excircle
+            ctx.arc(center_x, center_y, excircle_radius, 0, 2 * Math.PI); // setting center coords and radius
+            ctx.strokeStyle = 'blue'; // setting a color
+            ctx.stroke(); // drawing
+
+            ctx.beginPath(); // incircle 
+            ctx.arc(center_x, center_y, incircle_radius, 0, 2 * Math.PI); // setting center coords and radius
+            ctx.strokeStyle = 'red'; // setting a color
+            ctx.stroke(); // drawing
+
+
+
+
+
+        }
+
+        function clean() {
+            ctx.clearRect(0, 0, c.width, c.height);
+        }
+    </script>
+</body>
+
+</html>
