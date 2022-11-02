@@ -6,13 +6,8 @@
 
 <body>
     <form name="CAL">
-        Ax=<input name="inpAx" type "text" value="0" />
-        <BR> Ay=
-        <input name="inpAy" type "text" value="0" />
-        <BR> Bx=
-        <input name="inpBx" type "text" value="600" />
-        <BR> By=
-        <input name="inpBy" type "text" value="400" />
+        Предпоследно число от фак. №=<input name="inpsecondlast" type "text" value="0" />
+        <BR> Последно число от фак. №=<input name="inplast" type "text" value="0" />
         <BR>
     </form>
     <button onClick="draw();">[DRAW]</button>
@@ -24,6 +19,8 @@ Your browser does not support the HTML canvas tag.
 </canvas>
 
     <script>
+        var faculty_number = 0
+
         var center_x = 64; // creating variable for center coords
         var center_y = 54;
 
@@ -31,22 +28,24 @@ Your browser does not support the HTML canvas tag.
         var excircle_radius = 44;
 
         var triangle_h = 3 * incircle_radius; // variables for the triangle's height and side
-        var triangle_a = excircle_radius * Math.sqrt(3);
+        var triangle_a = triangle_h * 2 / Math.sqrt(3);
 
         var ax = center_x; // coords for top point of triangle
         var ay = center_y - excircle_radius;
 
         var bx = center_x + (triangle_a / 2); // coords for bottom right
-        var by = center_y + incircle_radius - 10;
+        var by = center_y + incircle_radius;
 
         var cx = center_x - (triangle_a / 2); //coords for bottom left
-        var cy = center_y + incircle_radius - 10;
+        var cy = center_y + incircle_radius;
 
         var c = document.getElementById("firstCANVAS");
         var ctx = c.getContext("2d");
 
         function draw() {
 
+
+            ctx.lineWidth = "2";
             ctx.beginPath(); // triangle
             ctx.moveTo(ax, ay); // starting from the top point
             ctx.lineTo(bx, by); // moving to bottom right
